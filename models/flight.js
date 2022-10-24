@@ -10,21 +10,26 @@ const flightSchema = new Schema({
     airport: {
         type: String,
         enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SFO', 'MSY', 'SNA'],
-        default: 'SNA'
     },
     flightNo: {
-        type: Number,
-        min: 10,
-        max: 9999
+        type: Number, 
+        default: 666,
+        // min: 10,
+        // max: 9999
     },
     departs: {
         type: Date,
-        default: new Date().getFullYear 
-        // function() {
-        //     return new Date().setFullYear(new Date().getFullYear() + 1)
-        // },
-    }
- 
+        default: function() {
+            return new Date().setFullYear(new Date().getFullYear() + 1)
+        },
+    }   
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Flight', flightSchema);
+
+// default: new Date().getFullYear 
+// function() {
+//     return new Date().setFullYear(new Date().getFullYear() + 1)
+// },
